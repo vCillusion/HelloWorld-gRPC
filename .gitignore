@@ -1,0 +1,5 @@
+*.suo
+/Client/bin
+/Client/obj
+/HelloWorld/bin
+/HelloWorld/obj
