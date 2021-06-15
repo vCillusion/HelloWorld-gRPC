@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package vcillusion.helloworld.v1;
+
+service MessageStore {
+	rpc GetMessage (MessageRequest) returns (MessageResponse) {}
+}
+
+message MessageRequest {
+	string name = 1;
+}
+
+message MessageResponse {
+	string message = 1;
+}

@@ -1,15 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <StartupObject>HelloWorld.Program</StartupObject>
+    <StartupObject>MessageService.Program</StartupObject>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Protobuf Include="..\protos\helloworld.proto" Link="\protos\helloworld.proto" GrpcServices="Server" />
-    <Protobuf Include="..\protos\messageservice.proto" Link="protos\messageservice.proto" GrpcServices="Client" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.17.3" />
@@ -19,4 +14,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\protos\messageservice.proto" Link="protos\messageservice.proto" GrpcServices="Server" />
+  </ItemGroup>
+
 </Project>
