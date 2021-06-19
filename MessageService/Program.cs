@@ -8,25 +8,26 @@ namespace MessageService
     class Program
     {
         private const string MessageServicePortKey = "MessageServicePort";
-        private const int MessageServicePortDefault = 3031;
+        private const int MessageServicePortDefault = 5031;
 
         private static readonly AutoResetEvent Closing = new AutoResetEvent(false);
 
         static void Main()
         {
             Console.WriteLine("Welcome to Hello World Message Server!");
-            const string host = "localhost";
+            const string host = "0.0.0.0";
             if (!int.TryParse(Environment.GetEnvironmentVariable(MessageServicePortKey), out var port))
             {
                 port = MessageServicePortDefault;
             }
-            var helloWorldServer = new Server
+
+            var messageServiceServer = new Server()
             {
                 Services = { MessageStore.BindService(new MessageServer()) },
                 Ports = { new ServerPort(host, port, ServerCredentials.Insecure) }
             };
-            helloWorldServer.Start();
-            Console.WriteLine("Listening...");
+            messageServiceServer.Start();
+            Console.WriteLine($"Listening on port {port}...");
             Console.CancelKeyPress += OnExit;
             Closing.WaitOne();
         }

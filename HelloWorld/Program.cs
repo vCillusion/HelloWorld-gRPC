@@ -11,17 +11,17 @@ namespace HelloWorld
         private const string MessageServiceHostDefault = "localhost";
         
         private const string MessageServicePortKey = "MessageServicePort";
-        private const int MessageServicePortDefault = 3031;
+        private const int MessageServicePortDefault = 5031;
 
         private const string HelloWorldPortKey = "HelloWorldPort";
-        private const int HelloWorldPortDefault = 3030;
+        private const int HelloWorldPortDefault = 5030;
         
         private static readonly AutoResetEvent Closing = new AutoResetEvent(false);
 
         private static void Main()
         {
             Console.WriteLine("Welcome to Hello World Server!");
-            const string host = "localhost";
+            const string host = "0.0.0.0";
             if (!int.TryParse(Environment.GetEnvironmentVariable(HelloWorldPortKey), out var port))
             {
                 port = HelloWorldPortDefault;
@@ -33,7 +33,7 @@ namespace HelloWorld
             
             if (!int.TryParse(Environment.GetEnvironmentVariable(MessageServicePortKey), out var messageServicePort))
             {
-                port = MessageServicePortDefault;
+                messageServicePort = MessageServicePortDefault;
             }
 
             var channel = new Channel(messageServiceHost, messageServicePort, ChannelCredentials.Insecure);
@@ -45,7 +45,7 @@ namespace HelloWorld
                 Ports = { new ServerPort(host, port, ServerCredentials.Insecure) }
             };
             helloWorldServer.Start();
-            Console.WriteLine("Listening...");
+            Console.WriteLine($"Listening on port {port}...");
             Console.CancelKeyPress += OnExit;
             Closing.WaitOne();
         }

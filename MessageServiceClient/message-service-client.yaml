@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: message-service-client
+  name: message-service-client
+spec:
+  containers:
+  - name: message-service-client
+    image: reglocal:5000/message-service-client:v1
+    env:
+    - name: MessageServiceHost
+      value: "message-service.default.svc.cluster.local"
+    - name: MessageServicePort
+      value: "5031"
+    imagePullPolicy: Always
+  restartPolicy: Always

@@ -11,7 +11,7 @@ namespace Client
         {
             Console.WriteLine("Welcome to Hello World Client!");
             const string host = "localhost";
-            const int port = 3030;
+            const int port = 5030;
             var channel = new Channel(host, port, ChannelCredentials.Insecure);
             var client = new Greeter.GreeterClient(channel);
             do
@@ -22,6 +22,7 @@ namespace Client
                 Console.WriteLine($"Received: {response.Message}");
                 Console.WriteLine("Do you wanted to send more messages? (y/n)...");
             } while (Console.ReadLine() == "y");
+            channel.ShutdownAsync().Wait();
         }
     }
 }

@@ -1,7 +1,4 @@
 *.suo
-/Client/bin
-/Client/obj
-/HelloWorld/bin
-/HelloWorld/obj
-/MessageService/bin
-/MessageService/obj
+/.vs
+/**/bin
+/**/obj
