@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Vcillusion.Helloworld.V1;
 
@@ -18,7 +19,7 @@ namespace HelloWorld
         
         private static readonly AutoResetEvent Closing = new AutoResetEvent(false);
 
-        private static void Main()
+        private static async Task Main()
         {
             Console.WriteLine("Welcome to Hello World Server!");
             const string host = "0.0.0.0";
@@ -36,8 +37,14 @@ namespace HelloWorld
                 messageServicePort = MessageServicePortDefault;
             }
 
+            Console.WriteLine($"Message Service Client uses {messageServiceHost}:{messageServicePort}!");
+
             var channel = new Channel(messageServiceHost, messageServicePort, ChannelCredentials.Insecure);
             var client = new MessageStore.MessageStoreClient(channel);
+
+            Console.WriteLine("Message Server Test Connection...");
+            var response = await client.GetMessageAsync(new MessageRequest {Name = "Test"});
+            Console.WriteLine($"Message Server Test Connection Success...: {response.Message}");
 
             var helloWorldServer = new Server
             {

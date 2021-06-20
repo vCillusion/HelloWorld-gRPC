@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: hello-world-client
+  name: hello-world-client
+spec:
+  containers:
+  - name: hello-world-client
+    image: reglocal:5000/hello-world-client:v1
+    env:
+    - name: HelloWorldHost
+      value: "hello-world.default.svc.cluster.local"
+    - name: HelloWorldPort
+      value: "5030"
+    imagePullPolicy: Always
+  restartPolicy: Always

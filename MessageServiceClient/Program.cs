@@ -29,6 +29,8 @@ namespace MessageServiceClient
                 port = MessageServicePortDefault;
             }
 
+            Console.WriteLine($"Connecting to Message Service {host}:{port}!");
+
             var channel = new Channel(host, port, ChannelCredentials.Insecure);
             var client = new MessageStore.MessageStoreClient(channel);
 
